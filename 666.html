@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>崩坏3 深度人格匹配测试</title>
+    <title>休伯利安号 灵魂共鸣测试</title>
     <style>
         :root {
-            --primary-color: #6c5ce7;
-            --bg-color: #f3f4f6;
-            --text-color: #2d3436;
-            --card-bg: #ffffff;
+            --primary-color: #00d2ff;
+            --secondary-color: #3a7bd5;
+            --bg-dark: #121826;
+            --card-bg: #1e2532;
+            --text-main: #e2e8f0;
+            --text-sub: #94a3b8;
+            --btn-bg: #2b3548;
         }
         * { box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 0%, #1e2a45 0%, #121826 60%);
+            color: var(--text-main);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -25,58 +29,66 @@
         }
         .container {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px 25px;
-            max-width: 500px;
+            border: 1px solid #2d3748;
+            border-radius: 16px;
+            padding: 35px 30px;
+            max-width: 550px;
             width: 100%;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
-        h1 { color: var(--primary-color); font-size: 24px; margin-bottom: 10px; }
-        p { color: #636e72; line-height: 1.6; font-size: 15px; }
+        h1 { 
+            color: var(--primary-color); 
+            font-size: 24px; 
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+        }
+        p { color: var(--text-sub); line-height: 1.6; font-size: 15px; }
         .hidden { display: none !important; }
         
         /* 按钮与选项 */
         button, .option-btn {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             color: white;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 16px 20px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: bold;
             cursor: pointer;
             margin-top: 25px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         button:hover {
-            background-color: #5b4bc4;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
         }
         .option-btn {
-            background-color: #f8f9fa;
-            color: #2d3436;
-            margin: 10px 0;
-            border: 2px solid #e9ecef;
+            background: var(--btn-bg);
+            color: var(--text-main);
+            margin: 12px 0;
+            border: 1px solid #3f4a5e;
             text-align: left;
             font-weight: normal;
+            letter-spacing: normal;
+            text-transform: none;
         }
         .option-btn:hover {
             border-color: var(--primary-color);
-            background-color: #f0effc;
+            background: #253043;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.1);
             transform: none;
-            box-shadow: none;
         }
 
         /* 顶部进度条 */
         .progress-container {
-            height: 6px;
-            background: #e9ecef;
-            border-radius: 10px;
+            height: 4px;
+            background: #2d3748;
+            border-radius: 2px;
             margin-bottom: 30px;
             overflow: hidden;
         }
@@ -84,40 +96,52 @@
             height: 100%;
             background: var(--primary-color);
             width: 0%;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--primary-color);
         }
 
         /* 结果页样式 */
         .result-image {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             object-fit: cover;
             margin: 15px auto;
-            border: 4px solid #f0effc;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+            background-color: var(--btn-bg);
         }
-        .result-name { font-size: 28px; color: var(--text-color); margin: 10px 0; font-weight: bold; }
-        .result-desc { font-size: 14px; text-align: left; background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px; }
+        .result-name { font-size: 32px; color: white; margin: 10px 0; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
+        .result-desc { 
+            font-size: 15px; 
+            text-align: left; 
+            background: #151a23; 
+            padding: 18px; 
+            border-left: 4px solid var(--primary-color);
+            border-radius: 4px; 
+            margin-bottom: 25px; 
+            color: #cbd5e1;
+        }
 
         /* 维度分析进度条 */
         .dimension-box { margin-bottom: 25px; text-align: left; }
-        .dimension-item { margin-bottom: 12px; }
-        .dimension-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #636e72;}
-        .dim-bar-bg { height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
-        .dim-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease-out; }
-        .color-action { background: #ff7675; }
-        .color-logic { background: #74b9ff; }
-        .color-empathy { background: #fd79a8; }
-        .color-discipline { background: #00b894; }
+        .dimension-item { margin-bottom: 14px; }
+        .dimension-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: bold; margin-bottom: 6px; color: var(--text-main);}
+        .dim-bar-bg { height: 6px; background: #2d3748; border-radius: 3px; overflow: hidden; }
+        .dim-bar-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        .color-action { background: #ff4757; box-shadow: 0 0 8px #ff4757; }
+        .color-logic { background: #1e90ff; box-shadow: 0 0 8px #1e90ff;}
+        .color-empathy { background: #ff7f50; box-shadow: 0 0 8px #ff7f50;}
+        .color-discipline { background: #2ed573; box-shadow: 0 0 8px #2ed573;}
 
         /* 底部角标 */
         .footer {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 12px;
-            color: #b2bec3;
+            color: #475569;
             font-family: 'Courier New', Courier, monospace;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -126,10 +150,11 @@
     <div class="container">
         <!-- 首页 -->
         <div id="home-page">
-            <h1>圣芙蕾雅心理测验档案</h1>
-            <p>基于大五人格与荣格心理学理论构建。<br>通过 8 道情景行为学测试题，解析你的潜意识维度，寻找与你灵魂波长最契合的《崩坏3》角色。</p>
-            <button onclick="startTest()">开始维度解析</button>
-            <div class="footer">powered by RickChan</div>
+            <h1>休伯利安号 灵魂共鸣测试</h1>
+            <p>正在连接虚数之树...<br>本测试基于《崩坏3》原著情境，通过解析你在绝境与日常中的真实抉择，测算你与哪位女武神的灵魂波长最为契合。</p>
+            <p style="font-size: 13px; color: #64748b; margin-top: 20px;">* 内置全新「废喵」与「卷王」维度分析</p>
+            <button onclick="startTest()">LINK START</button>
+            <div class="footer">powered by Bronya</div>
         </div>
 
         <!-- 答题页 -->
@@ -137,21 +162,20 @@
             <div class="progress-container">
                 <div class="progress-bar" id="progress"></div>
             </div>
-            <h2 id="question-text" style="font-size: 18px; margin-bottom: 20px; text-align: left;">加载中...</h2>
+            <h2 id="question-text" style="font-size: 17px; margin-bottom: 25px; text-align: left; line-height: 1.5; color: white;">加载中...</h2>
             <div id="options-container"></div>
         </div>
 
         <!-- 结果页 -->
         <div id="result-page" class="hidden">
-            <p style="margin: 0; font-size: 14px; font-weight: bold; color: var(--primary-color);">最高契合度角色</p>
+            <p style="margin: 0; font-size: 12px; font-weight: bold; color: var(--primary-color); letter-spacing: 2px;">MATCH SUCCESS</p>
+            
             <img id="result-img" class="result-image" src="" alt="角色头像">
             <div id="result-name" class="result-name">角色名</div>
             
             <div class="dimension-box">
-                <p style="font-weight: bold; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px;">心理维度分析</p>
-                
                 <div class="dimension-item">
-                    <div class="dimension-label"><span>⚔️ 行动力 (Action)</span><span id="score-action">0%</span></div>
+                    <div class="dimension-label"><span>⚔️ 爆发力 (Action)</span><span id="score-action">0%</span></div>
                     <div class="dim-bar-bg"><div class="dim-bar-fill color-action" id="bar-action" style="width: 0%"></div></div>
                 </div>
                 <div class="dimension-item">
@@ -159,11 +183,11 @@
                     <div class="dim-bar-bg"><div class="dim-bar-fill color-logic" id="bar-logic" style="width: 0%"></div></div>
                 </div>
                 <div class="dimension-item">
-                    <div class="dimension-label"><span>❤️ 共情力 (Empathy)</span><span id="score-empathy">0%</span></div>
+                    <div class="dimension-label"><span>❤️ 羁绊感 (Empathy)</span><span id="score-empathy">0%</span></div>
                     <div class="dim-bar-bg"><div class="dim-bar-fill color-empathy" id="bar-empathy" style="width: 0%"></div></div>
                 </div>
                 <div class="dimension-item">
-                    <div class="dimension-label"><span>🛡️ 秩序感 (Discipline)</span><span id="score-discipline">0%</span></div>
+                    <div class="dimension-label"><span>🛡️ 勤奋度 (Diligence)</span><span id="score-discipline">0%</span></div>
                     <div class="dim-bar-bg"><div class="dim-bar-fill color-discipline" id="bar-discipline" style="width: 0%"></div></div>
                 </div>
             </div>
@@ -171,126 +195,133 @@
             <div id="result-desc" class="result-desc">描述内容...</div>
             
             <button onclick="location.reload()">重新建立连接</button>
-            <div class="footer">powered by Bronya</div>
+            <div class="footer">powered by RickChan</div>
         </div>
     </div>
 
     <script>
-        // 定义 4 个性格维度，初始分数为 0
-        let userProfile = { Action: 0, Logic: 0, Empathy: 0, Discipline: 0 };
+        // 用户得分追踪 (初始为0)
+        let userProfile = { Action: 0, Logic: 0, Empathy: 0, Diligence: 0 };
 
-        // 心理学题库配置（每题会为特定维度加分）
+        // 深度崩坏3剧情题库
         const questions = [
             {
-                question: "1. 当你身处一个完全陌生的聚会环境时，你通常会：",
+                question: "1. 【长空市崩坏爆发】死士和崩坏兽在街道肆虐，城市化为废墟，你的第一反应是：",
                 options: [
-                    { text: "主动去认识新朋友，成为话题中心", traits: { Action: 2, Empathy: 1 } },
-                    { text: "找个安静的角落观察别人或做自己的事", traits: { Logic: 2, Discipline: 1 } },
-                    { text: "寻找看起来亲切的人，进行一对一的深入交流", traits: { Empathy: 2 } },
-                    { text: "按聚会流程走，不刻意出风头也不完全隐形", traits: { Discipline: 2 } }
+                    { text: "召唤武器直接冲上去，把它们全揍飞！", traits: { Action: 4, Empathy: 1 } },
+                    { text: "寻找制高点隐蔽，分析敌人的种类和弱点。", traits: { Logic: 4, Diligence: 1 } },
+                    { text: "优先疏散平民，拼死保护身边的同伴。", traits: { Empathy: 4, Diligence: 1 } },
+                    { text: "找个安全的地下室躲起来，活着最重要！", traits: { Logic: 2, Empathy: 1 } } // 摸鱼选项不加勤奋
                 ]
             },
             {
-                question: "2. 面对团队项目中出现的一个棘手危机，你的第一反应是：",
+                question: "2. 【圣芙蕾雅日常】德丽莎学园长布置了堆积如山的假期作业，你会：",
                 options: [
-                    { text: "立刻采取行动，边做边寻找解决办法", traits: { Action: 3 } },
-                    { text: "马上停下来，全面分析数据和失败原因", traits: { Logic: 3 } },
-                    { text: "安抚团队情绪，确保大家不要恐慌", traits: { Empathy: 3 } },
-                    { text: "查看应急预案，按照规章制度逐步处理", traits: { Discipline: 3 } }
+                    { text: "制定严格的日程表按时高效完成，顺便去训练室加练。", traits: { Diligence: 5 } },
+                    { text: "借助网络或AI辅助，寻找最优解快速搞定。", traits: { Logic: 4, Diligence: 1 } },
+                    { text: "组织大家一起开学习会，顺便做点点心慰劳大家。", traits: { Empathy: 3, Diligence: 2 } },
+                    { text: "作业？什么作业？先睡个午觉或者找人抄抄再说~", traits: { Empathy: 2 } } // 极低勤奋
                 ]
             },
             {
-                question: "3. 朋友向你倾诉他遇到了一件很不公平的事情，你会：",
+                question: "3. 【往世乐土】你深入乐土探索，遇到了一位神秘的英桀，对方提出了决斗邀请：",
                 options: [
-                    { text: "帮他分析事情的利弊，指出他自身的问题", traits: { Logic: 3 } },
-                    { text: "陪他一起大骂对方，完全站在他这边", traits: { Action: 1, Empathy: 2 } },
-                    { text: "安静地倾听，给他一个拥抱，提供情绪价值", traits: { Empathy: 3 } },
-                    { text: "询问他是否需要你帮忙去讨回公道", traits: { Action: 2, Discipline: 1 } }
+                    { text: "欣然接受！正好拿来当做突破极限的试炼。", traits: { Action: 3, Diligence: 3 } },
+                    { text: "热情地打招呼：“哎呀，决斗多伤和气，不如一起喝杯下午茶？”", traits: { Empathy: 5 } },
+                    { text: "迅速评估双方实力差距，如果是不可战胜的强敌就战略撤退。", traits: { Logic: 4 } },
+                    { text: "直接躺平：“老大，我认输！能给我点亮闪闪的纪念品吗？”", traits: { Logic: 2, Empathy: 2 } }
                 ]
             },
             {
-                question: "4. 对于制定旅行计划，你更倾向于：",
+                question: "4. 【律者觉醒】面对脑海中“崩坏”意志的蛊惑，它承诺给你无尽的力量，你会：",
                 options: [
-                    { text: "必须有详细的行程表，精确到小时", traits: { Discipline: 3, Logic: 1 } },
-                    { text: "定个大概的目的地，其他的到了再说", traits: { Action: 2 } },
-                    { text: "查阅大量的攻略，对比性价比做出最优解", traits: { Logic: 3 } },
-                    { text: "把决定权交给同伴，只要大家开心就好", traits: { Empathy: 3 } }
+                    { text: "凭借绝对的钢铁意志和纪律，将杂音彻底粉碎。", traits: { Diligence: 4, Action: 1 } },
+                    { text: "如果这份力量能拯救我所爱的人，我愿意承担罪孽。", traits: { Empathy: 4, Action: 2 } },
+                    { text: "尝试解析这份力量的底层逻辑，反向夺取控制权。", traits: { Logic: 5 } },
+                    { text: "“太麻烦了吧，拥有力量还要干活去打仗，我拒绝！”", traits: { Logic: 2 } }
                 ]
             },
             {
-                question: "5. 在学习一项全新的技能时，你觉得最有效的方法是：",
+                question: "5. 【女武神补给】休伯利安发了工资（水晶），面对新出的精准补给池，你的抽卡策略是：",
                 options: [
-                    { text: "直接上手实践，在不断试错中学习", traits: { Action: 3 } },
-                    { text: "先阅读完所有的理论手册和底层逻辑", traits: { Logic: 3 } },
-                    { text: "找一个优秀的导师或同学，模仿他们", traits: { Empathy: 2, Discipline: 1 } },
-                    { text: "制定严格的每日学习打卡计划", traits: { Discipline: 3 } }
+                    { text: "单抽奇迹！只要有280水晶就直接梭哈！", traits: { Action: 4 } },
+                    { text: "精确计算保底机制，不到万无一失绝不下池子。", traits: { Logic: 4, Diligence: 2 } },
+                    { text: "随缘抽卡，感觉今天运气好就抽，纯靠玄学。", traits: { Empathy: 3 } },
+                    { text: "为了提升核心战斗力，只抽必需的毕业装备，绝不乱花。", traits: { Diligence: 4, Logic: 1 } }
                 ]
             },
             {
-                question: "6. 如果规则阻碍了你达成一件对的事，你会：",
+                question: "6. 【最后一课】如果一位对你极为重要的导师为了保护你而牺牲，你会：",
                 options: [
-                    { text: "毫不犹豫打破规则，结果最重要", traits: { Action: 3 } },
-                    { text: "寻找规则的漏洞，合理规避", traits: { Logic: 3 } },
-                    { text: "考虑打破规则是否会伤害到其他人", traits: { Empathy: 3 } },
-                    { text: "坚持规则，认为秩序是一切的基石", traits: { Discipline: 3 } }
+                    { text: "继承她的意志，哪怕燃尽自己也要把这个不完美的故事变成期望的样子！", traits: { Action: 4, Empathy: 3 } },
+                    { text: "将悲伤深埋心底，继续执行任务，绝不让她的牺牲白费。", traits: { Diligence: 4, Logic: 2 } },
+                    { text: "陷入深深的自责与痛苦，甚至愿意坠入黑暗去换回她。", traits: { Empathy: 5 } },
+                    { text: "带着她的嘱托，好好活下去，去看看这个世界的美好。", traits: { Empathy: 2, Logic: 2 } }
                 ]
             },
             {
-                question: "7. 在看电影或小说时，你最容易被哪种情节打动？",
+                question: "7. 【理想休假】奥托主教给你批了一周的带薪休假，你理   的放松方式是：",
                 options: [
-                    { text: "主角通过缜密的推理战胜了反派", traits: { Logic: 3 } },
-                    { text: "主角为了保护他人牺牲自己的高光时刻", traits: { Empathy: 3, Action: 1 } },
-                    { text: "热血沸腾的战斗和不屈不挠的意志", traits: { Action: 3 } },
-                    { text: "一切伏笔回收，命运的齿轮严丝合缝地转动", traits: { Discipline: 3 } }
+                    { text: "换个地方继续特训，不能有一天的懈怠！", traits: { Diligence: 5 } },
+                    { text: "在温暖的阳光下睡大觉，醒了就吃，吃了再睡。", traits: { Action: 0 } }, // 不加分
+                    { text: "和最喜欢的人一起去逛街、试衣服、吃大餐。", traits: { Empathy: 4, Action: 1 } },
+                    { text: "宅在房间里打《吼姆大冒险》或阅读专业书籍。", traits: { Logic: 4 } }
                 ]
             },
             {
-                question: "8. 总结一下，你内心深处最渴望成为什么样的人？",
+                question: "8. 【终焉之战】站在月球表面，面对无可匹敌的终焉，你内心最大的动力是：",
                 options: [
-                    { text: "绝对理智，不被情感左右的智者", traits: { Logic: 4 } },
-                    { text: "充满力量，能打破一切枷锁的勇者", traits: { Action: 4 } },
-                    { text: "温柔善良，能带给周围人温暖的太阳", traits: { Empathy: 4 } },
-                    { text: "克制自律，永远坚守原则的守护者", traits: { Discipline: 4 } }
+                    { text: "责任与人类的存续，这是我无论如何都必须完成的使命。", traits: { Diligence: 4, Logic: 1 } },
+                    { text: "为了守护身边那个对我最重要的人，我可以战胜一切。", traits: { Empathy: 5 } },
+                    { text: "创造一个大家都能笑着活下去的未来！", traits: { Action: 4, Empathy: 1 } },
+                    { text: "虽然我很怕死...但为了能和大家一起回老家开店，拼了！", traits: { Logic: 2, Empathy: 3 } }
                 ]
             }
         ];
 
-        // 角色预设维度模板 (总分约 20 分)
+        // 角色预设雷达模型 (满分约 25 分)
         const characters = [
             {
                 id: "kiana",
                 name: "琪亚娜·卡斯兰娜",
-                img: "https://api.dicebear.com/7.x/initials/svg?seed=Kiana&backgroundColor=ff9f43", 
-                profile: { Action: 18, Logic: 4, Empathy: 14, Discipline: 6 },
-                desc: "你拥有极高的【行动力】。就像琪亚娜一样，你性格直率、充满活力。你可能不太喜欢繁文缛节，但当身边的人遇到危险时，你会毫不犹豫地挺身而出。你的直觉往往比理智更先一步带领你找到正确的方向。"
+                img: "https://api.dicebear.com/7.x/initials/svg?seed=Kiana&backgroundColor=ff4757&textColor=ffffff", 
+                profile: { Action: 24, Logic: 4, Empathy: 16, Diligence: 8 },
+                desc: "【薪炎的传承者】你拥有极高的爆发力和行动力！虽然偶尔脱线和冲动，但当绝境降临时，你永远是第一个冲上去挡在大家面前的人。你的直觉和一往无前的勇气，是你打破一切枷锁的最强武器。"
             },
             {
                 id: "bronya",
                 name: "布洛妮娅·扎伊切克",
-                img: "https://api.dicebear.com/7.x/initials/svg?seed=Bronya&backgroundColor=0abde3",
-                profile: { Action: 5, Logic: 18, Empathy: 7, Discipline: 14 },
-                desc: "你拥有极高的【理智度】。正如理之律者布洛妮娅，你冷静、客观，习惯用逻辑和数据分析问题。在团队中你是最可靠的智囊，虽然外表看起来有些高冷，但其实内心十分珍视那些被你划入“安全区”的朋友。"
+                img: "https://api.dicebear.com/7.x/initials/svg?seed=Bronya&backgroundColor=1e90ff&textColor=ffffff",
+                profile: { Action: 6, Logic: 25, Empathy: 10, Diligence: 14 },
+                desc: "【理智的重构者】你是绝对的理智派。正如理之律者，你习惯用数据和底层逻辑拆解所有难题。在团队中你是最可靠的智囊，虽然外表看起来古井无波，但其实内心极度珍视你认可的朋友。"
             },
             {
                 id: "mei",
                 name: "雷电芽衣",
-                img: "https://api.dicebear.com/7.x/initials/svg?seed=Mei&backgroundColor=8395a7",
-                profile: { Action: 9, Logic: 10, Empathy: 18, Discipline: 12 },
-                desc: "你拥有极高的【共情力】。你温柔、细腻，非常在意他人的感受。就像芽衣一样，你是团队里的“大家长”，习惯照顾别人。但温柔并不意味着软弱，为了守护重要的人，你可以爆发出惊人的决断力。"
+                img: "https://api.dicebear.com/7.x/initials/svg?seed=Mei&backgroundColor=8395a7&textColor=ffffff",
+                profile: { Action: 10, Logic: 10, Empathy: 25, Diligence: 12 },
+                desc: "【温柔的雷鸣】你拥有极高的共情力。你温柔细腻，总是在默默照顾身边的人。但这份温柔绝不是软弱——为了拯救对你来说最重要的人，哪怕化身罪人坠入黑暗，你也绝不回头。"
             },
             {
-                id: "fuhua",
-                name: "符华",
-                img: "https://api.dicebear.com/7.x/initials/svg?seed=FuHua&backgroundColor=ee5253",
-                profile: { Action: 8, Logic: 12, Empathy: 9, Discipline: 18 },
-                desc: "你拥有极高的【秩序感】。你极度自律、坚韧，做事极具原则性。正如赤鸢仙人，你可能背负着很多责任，习惯将事情默默扛在自己肩上。你相信日复一日的积累，有着常人难以企及的毅力。"
+                id: "durandal",
+                name: "幽兰黛尔",
+                img: "https://api.dicebear.com/7.x/initials/svg?seed=Durandal&backgroundColor=ffaa00&textColor=ffffff",
+                profile: { Action: 16, Logic: 12, Empathy: 6, Diligence: 26 },
+                desc: "【不灭的卷王】天命最强女武神！你拥有常人难以企及的“勤奋度”与绝对自律。你不相信捷径，只相信日复一日的汗水与挥剑。无论面对多大的困难，你那如钢铁般的意志都不会有丝毫动摇。"
+            },
+            {
+                id: "pardofelis",
+                name: "帕朵菲莉丝",
+                img: "https://api.dicebear.com/7.x/initials/svg?seed=Pardo&backgroundColor=2ed573&textColor=ffffff",
+                profile: { Action: 4, Logic: 18, Empathy: 18, Diligence: 2 },
+                desc: "【进击的废喵】打工是不可能打工的！你的“勤奋度”极低，完美诠释了什么是摸鱼达人和生存大师。虽然你平时总想躺平、遇到危险就想跑，但靠着极高的情商（羁绊）和街头智慧，你总能逢凶化吉。"
             },
             {
                 id: "elysia",
                 name: "爱莉希雅",
-                img: "https://api.dicebear.com/7.x/initials/svg?seed=Elysia&backgroundColor=ff9ff3",
-                profile: { Action: 14, Logic: 6, Empathy: 18, Discipline: 4 },
-                desc: "如飞花般绚丽！你开朗热情，充满魅力，对所有人都能展现出无差别的善意。你有着属于自己的独特步调，不受常规束缚。比起冰冷的规则，你更相信爱与人性的光辉。"
+                img: "https://api.dicebear.com/7.x/initials/svg?seed=Elysia&backgroundColor=ff7f50&textColor=ffffff",
+                profile: { Action: 12, Logic: 6, Empathy: 24, Diligence: 6 },
+                desc: "【无瑕的飞花】如飞花般绚丽！你开朗热情，充满魅力，对所有人都能展现出无差别的善意。你有着属于自己的独特步调，不受常规束缚。比起冰冷的规则和枯燥的训练，你更相信爱与人性的光辉。"
             }
         ];
 
@@ -300,7 +331,7 @@
             document.getElementById('home-page').classList.add('hidden');
             document.getElementById('quiz-page').classList.remove('hidden');
             currentQuestion = 0;
-            userProfile = { Action: 0, Logic: 0, Empathy: 0, Discipline: 0 };
+            userProfile = { Action: 0, Logic: 0, Empathy: 0, Diligence: 0 };
             renderQuestion();
         }
 
@@ -308,7 +339,7 @@
             const q = questions[currentQuestion];
             document.getElementById('question-text').innerText = q.question;
             
-            // 进度条
+            // 更新赛博进度条
             const progress = (currentQuestion / questions.length) * 100;
             document.getElementById('progress').style.width = `${progress}%`;
 
@@ -341,14 +372,13 @@
         function calculateResult() {
             document.getElementById('quiz-page').classList.add('hidden');
             
-            // 算法：计算用户维度与角色预设维度之间的"欧几里得距离"（差距），差距越小越匹配
+            // 算法：计算用户维度与角色预设维度之间的"欧几里得距离"
             let bestMatch = characters[0];
             let minDistance = Infinity;
 
             characters.forEach(char => {
                 let distance = 0;
                 for (let key in userProfile) {
-                    // (用户得分 - 角色预设得分) 的平方
                     distance += Math.pow(userProfile[key] - char.profile[key], 2);
                 }
                 if (distance < minDistance) {
@@ -362,11 +392,10 @@
             document.getElementById('result-img').src = bestMatch.img;
             document.getElementById('result-desc').innerText = bestMatch.desc;
 
-            // 渲染维度雷达条 (计算最大值用于百分比转换，题库理论单项最高分为约18分)
-            const maxScore = 18; 
+            // 渲染维度条 (以 25 分为满分基准转换百分比)
+            const maxScore = 25; 
             const calcPercent = (val) => Math.min(Math.round((val / maxScore) * 100), 100);
 
-            // 延迟一点执行动画效果
             setTimeout(() => {
                 const actionP = calcPercent(userProfile.Action);
                 document.getElementById('score-action').innerText = actionP + '%';
@@ -380,7 +409,7 @@
                 document.getElementById('score-empathy').innerText = empathyP + '%';
                 document.getElementById('bar-empathy').style.width = empathyP + '%';
 
-                const disciplineP = calcPercent(userProfile.Discipline);
+                const disciplineP = calcPercent(userProfile.Diligence);
                 document.getElementById('score-discipline').innerText = disciplineP + '%';
                 document.getElementById('bar-discipline').style.width = disciplineP + '%';
             }, 100);
